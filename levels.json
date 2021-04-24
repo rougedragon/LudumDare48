@@ -2,51 +2,61 @@
     {
         "start": "Game_jam",
         "end": "Ludum_Dare",
-        "step": 1
+        "minStep": 1,
+        "maxStep": 1
     },
     {
         "start": "Ludum_Dare",
         "end": "Mojang",
-        "step": 2
+        "minStep": 2,
+        "maxStep": 10
     },
     {
         "start": "Mathematics",
         "end": "Proposition",
-        "step": 2
+        "minStep": 2,
+        "maxStep": 10
     },
     {
         "start": "Computer",
         "end": "Execution_(computing)",
-        "step": 2
+        "minStep": 2,
+        "maxStep": 10
     },
     {
         "start": "Wikipedia",
         "end": "Promotion_(marketing)",
-        "step": 2
+        "minStep": 2,
+        "maxStep": 10
     },
     {
         "start": "Film_series",
         "end": "Harry_Potter",
-        "step": 2
+        "minStep": 2,
+        "maxStep": 10
     },
     {
         "start": "Profession",
         "end": "Skill",
-        "step": 2
+        "minStep": 2,
+        "maxStep": 10
     },
     {
         "start": "Psychology",
         "end": "Thought",
-        "step": 2
+        "minStep": 2,
+        "maxStep": 10
     },
     {
         "start": "Power_(physics)",
         "end": "Work_(thermodynamics)",
-        "step": 2
+        "minStep": 2,
+        "maxStep": 10
     },
     {
         "start": "River",
         "end": "Pacific_Ocean",
-        "step": 2
+        "minStep": 2,
+        "maxStep": 10
     }
 ]
