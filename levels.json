@@ -8,5 +8,10 @@
         "start": "Ludum_Dare",
         "end": "Mojang",
         "step": 2
+    },
+    {
+        "start": "Sydney",
+        "end": "Australia",
+        "step": 2
     }
 ]
