@@ -26,11 +26,16 @@ def getWikipage(wikipage):
         if link["rel"] == ["stylesheet"]:
             link.decompose()
 
+    
+
     # Adding the style sheet
     style = open("wikipediaStyle.css", "r").read()
     styleTag = soup.new_tag('style')
     styleTag.insert(0, style)
     soup.head.append(styleTag)
+
+    searchBar = soup.find(id='simpleSearch')
+    searchBar.decompose()
 
     return str(soup)
 
@@ -67,7 +72,7 @@ def level(level):
             "level": allLevels[level],
             "stepDone": 0
         }
-    return redirect("/wiki/" + session["info"]["level"]["start"])
+    return '<p>You start at ' + session["info"]["level"]["start"] + ' and you end at ' + session["info"]["level"]["end"] + '. You have a maximum of ' + str(session["info"]["level"]["step"]) + ' link to click.</p> <a href="/wiki/' + session["info"]["level"]["start"] + '">START</a>'
 
 
 @app.route('/wiki/<wikipage>')
@@ -91,4 +96,4 @@ def wikipage(wikipage):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=10001)
