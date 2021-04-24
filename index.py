@@ -8,8 +8,6 @@ import json
 app = Flask(__name__)
 app.secret_key = "YOUR SECRET KEY HERE"
 
-indexHtml = open("index.html", "r").read()
-
 allLevels = []
 with open('levels.json') as json_file:
     allLevels = json.load(json_file)
@@ -59,7 +57,7 @@ def create_player_id():
 
 @app.route('/')
 def index():
-    return indexHtml
+    return render_template("index.html")
 
 
 @app.route('/menu')
@@ -95,7 +93,7 @@ def level(level):
         "score": session["info"]["score"]
     }
     session["info"]["level"] = allLevels[level]
-    return '<p>You start at ' + session["info"]["level"]["start"] + ' and you end at ' + session["info"]["level"]["end"] + '. You have a maximum of ' + str(session["info"]["level"]["maxStep"]) + ' link to click but you can do it in ' + str(session["info"]["level"]["maxStep"]) + ' step.</p> <a href="/wiki/' + session["info"]["level"]["start"] + '">START</a>'
+    return render_template("levelStart.html", start=session["info"]["level"]["start"], end=session["info"]["level"]["end"], maxStep=str(session["info"]["level"]["maxStep"]), minStep=str(session["info"]["level"]["minStep"]), href='/wiki/' + session["info"]["level"]["start"])
 
 
 @app.route('/wiki/<wikipage>')
@@ -118,15 +116,15 @@ def wikipage(wikipage):
                 "score": session["info"]["score"] + scoreToWin
             }
             session["info"]["level"] = {}
-            return 'You win. Click <a href="/menu">here</a> to start a new level'
+            return render_template("win.html")
 
         else:
             if session["info"]["stepDone"] > session["info"]["level"]["maxStep"]:
                 session.clear()
-                return 'GAME OVER! Go back to the <a href="/">menu</a> to restart the game'
+                return render_template("gameover.html")
             return getWikipage(wikipage, session["info"]["level"]["end"], session["info"]["score"], (session["info"]["level"]["maxStep"] - session["info"]["stepDone"]) + 1)
     else:
-        return "You need to start a level before"
+        return "This is an error message: You need to start a level before"
 
 
 if __name__ == "__main__":
