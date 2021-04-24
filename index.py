@@ -16,7 +16,7 @@ with open('levels.json') as json_file:
     allLevels = json.load(json_file)
 
 
-def getWikipage(wikipage):
+def getWikipage(wikipage, target):
     r = requests.get('https://en.wikipedia.org/wiki/' + wikipage)
     txt = r.text
     soup = bs4.BeautifulSoup(txt)
@@ -36,6 +36,10 @@ def getWikipage(wikipage):
 
     searchBar = soup.find(id='simpleSearch')
     searchBar.decompose()
+
+    extraSoup = bs4.BeautifulSoup('<div id="mw-head" style="color:red;text-align:center;font-size:xx-large;">TARGET: ' + target + '<br>SCORE: 15</div>')
+    print(soup.find(id='mw-head').replace_with(extraSoup))
+    #targetElt.insert(0, "TARGET: " + target)
 
     return str(soup)
 
@@ -90,7 +94,7 @@ def wikipage(wikipage):
         else:
             if session["info"]["stepDone"] > session["info"]["level"]["step"]:
                 return 'You loose this level. You have made too many step. Go back to the <a href="/menu">menu</a> to start a new level'
-            return getWikipage(wikipage)
+            return getWikipage(wikipage, session["info"]["level"]["end"])
     else:
         return "You need to start a level before"
 
