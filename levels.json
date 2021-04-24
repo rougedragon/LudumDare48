@@ -1,0 +1,12 @@
+[
+    {
+        "start": "Game_jam",
+        "end": "Ludum_Dare",
+        "step": 1
+    },
+    {
+        "start": "Ludum_Dare",
+        "end": "Mojang",
+        "step": 2
+    }
+]
