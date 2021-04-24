@@ -122,8 +122,8 @@ def wikipage(wikipage):
 
         else:
             if session["info"]["stepDone"] > session["info"]["level"]["maxStep"]:
-                
-                return 'You loose this level. You have made too many step. Go back to the <a href="/menu">menu</a> to start a new level'
+                session.clear()
+                return 'GAME OVER! Go back to the <a href="/">menu</a> to restart the game'
             return getWikipage(wikipage, session["info"]["level"]["end"], session["info"]["score"], (session["info"]["level"]["maxStep"] - session["info"]["stepDone"]) + 1)
     else:
         return "You need to start a level before"
