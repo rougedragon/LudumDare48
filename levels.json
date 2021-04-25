@@ -1,5 +1,10 @@
 [
     {
+        "start": "Pet",
+        "end": "Animal",
+        "minStep": 1
+    },
+    {
         "start": "Game_jam",
         "end": "Ludum_Dare",
         "minStep": 1
@@ -12,11 +17,6 @@
     {
         "start": "Film_series",
         "end": "Harry_Potter",
-        "minStep": 2
-    },
-    {
-        "start": "Ludum_Dare",
-        "end": "Mojang",
         "minStep": 2
     },
     {

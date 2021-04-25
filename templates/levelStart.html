@@ -20,8 +20,10 @@
         <div>Your target page is <p class="color-green">{{end}}</p>.</div>
     </div>
     <div class="card card-normal">
+        <div>Shortest existing path: <p class="font-normal" style="font-weight: bold;">{{minStep}} click{% if minStep | int > 1 %}s{%endif%}</p>.</div>
+    </div>
+    <div class="card card-normal">
         <div>You must get to the target page in less than {{maxStep}} clicks.</div>
-        <div>But there is a solution in only <p class="font-normal" style="font-weight: bold;">{{minStep}} click{% if minStep | int > 1 %}s{%endif%}</p>.</div>
     </div>
     <div class="card card-normal">
         <a href="{{href}}"><button class="start-btn">START</button></a>
