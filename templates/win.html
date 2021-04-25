@@ -14,8 +14,8 @@
         <div class="title">You win</div>
     </div>
     <div class="card card-normal">
-        <div>You have earn {{scoreEarn}} score</div>
-        <div>So you have {{score}} score now!</div>
+        <div>You have earned <p class="color-blue">{{scoreEarn}}</p> point{% if scoreEarn | int > 1 %}s{%endif%}.</div>
+        <div style="font-size: xx-large; margin-top: 10px;">Your score: <p class="color-green" style="font-weight: bold;">{{score}}</p> point{% if score | int > 1 %}s{%endif%}.</div>
     </div>
     <div class="card card-normal">
         <a href="/menu"><button class="start-btn">Start a new level</button></a>

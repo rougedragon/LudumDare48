@@ -14,8 +14,8 @@
         <div class="title">GAME OVER</div>
     </div>
     <div class="card card-normal">
-        <div>You have a final score of {{score}}</div>
-        <div>You are in position {{positionHighScore}} on {{nbHighScore}} scores</div>
+        <div>Your final score: <p class="font-normal" style="font-size: xx-large;">{{score}}</p></div>
+        <div>Your position in the scoreboard is <p class="color-blue" style="font-weight: bold;">{{positionHighScore}}</p> out of <p class="color-green" style="font-weight: bold;">{{nbHighScore}}</p></div>
     </div>
     <div class="card card-normal">
         <form action="/highscore" method="POST">
