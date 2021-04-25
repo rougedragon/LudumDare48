@@ -147,7 +147,7 @@ def level(level):
         "score": session["info"]["score"]
     }
     session["info"]["level"] = allLevels[level]
-    return render_template("levelStart.html", start=session["info"]["level"]["start"], end=session["info"]["level"]["end"], maxStep=str(session["info"]["level"]["maxStep"]), minStep=str(session["info"]["level"]["minStep"]), href='/wiki/' + session["info"]["level"]["start"], level=level + 1)
+    return render_template("levelStart.html", start=session["info"]["level"]["start"].replace("_", " "), end=session["info"]["level"]["end"].replace("_", " "), maxStep=str(session["info"]["level"]["maxStep"]), minStep=str(session["info"]["level"]["minStep"]), href='/wiki/' + session["info"]["level"]["start"], level=level + 1)
 
 
 @app.route('/wiki/<wikipage>')
@@ -197,7 +197,7 @@ def wikipage(wikipage):
                 session.clear()
                 return render_template("gameover.html", score=score, level=level)
             timeTimer = (session["info"]["level"]["startTime"] + timedelta(minutes = 2)) - datetime.now()
-            return getWikipage(wikipage, session["info"]["level"]["end"], session["info"]["score"], (session["info"]["level"]["maxStep"] - session["info"]["stepDone"]) + 1, str(timeTimer)[3:7])
+            return getWikipage(wikipage, session["info"]["level"]["end"].replace("_", " "), session["info"]["score"], (session["info"]["level"]["maxStep"] - session["info"]["stepDone"]) + 1, str(timeTimer)[3:7])
     else:
         return "This is an error message: You need to start a level before"
 
