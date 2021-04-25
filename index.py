@@ -85,6 +85,11 @@ def menu():
 
 @app.route('/<int:level>')
 def level(level):
+    if level >= len(allLevels):
+        #The player win
+        score = session["info"]["score"]
+        session.clear()
+        return render_template("winGame.html", score=score)
     session["info"] = {
         "id": session["info"]["id"],
         "level": allLevels[level],

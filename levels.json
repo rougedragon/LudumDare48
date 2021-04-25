@@ -3,7 +3,7 @@
         "start": "Game_jam",
         "end": "Ludum_Dare",
         "minStep": 1,
-        "maxStep": 1
+        "maxStep": 5
     },
     {
         "start": "Ludum_Dare",
