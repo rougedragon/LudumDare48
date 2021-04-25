@@ -94,7 +94,6 @@ def highscore():
         level = request.form["level"]
         cursor.execute("INSERT INTO highscore VALUES ('" + name + "'," + score + "," + level + ")")
         conn.commit()
-        time.sleep(2)
 
     cursor.execute("SELECT * FROM highscore ORDER BY score")
     listOfAllScoreSql = cursor.fetchall()
@@ -107,6 +106,8 @@ def highscore():
         a, b, c = elt
         listOfAllScore.append([i,a,b,c])
         i += 1
+    time.sleep(2)
+    conn.close()
     return render_template("highscore.html", listOfAllScore=listOfAllScore)
 
 @app.route('/menu')
