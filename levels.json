@@ -5,6 +5,16 @@
         "minStep": 1
     },
     {
+        "start": "River",
+        "end": "Pacific_Ocean",
+        "minStep": 2
+    },
+    {
+        "start": "Film_series",
+        "end": "Harry_Potter",
+        "minStep": 2
+    },
+    {
         "start": "Ludum_Dare",
         "end": "Mojang",
         "minStep": 2
@@ -25,11 +35,6 @@
         "minStep": 2
     },
     {
-        "start": "Film_series",
-        "end": "Harry_Potter",
-        "minStep": 2
-    },
-    {
         "start": "Profession",
         "end": "Skill",
         "minStep": 2
@@ -42,11 +47,6 @@
     {
         "start": "Power_(physics)",
         "end": "Work_(thermodynamics)",
-        "minStep": 2
-    },
-    {
-        "start": "River",
-        "end": "Pacific_Ocean",
         "minStep": 2
     },
     {
