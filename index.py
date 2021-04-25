@@ -4,6 +4,7 @@ import requests
 import random
 import string
 import json
+from datetime import datetime, timedelta
 
 app = Flask(__name__, static_folder="static")
 app.secret_key = "YOUR SECRET KEY HERE"
@@ -13,7 +14,7 @@ with open('levels.json') as json_file:
     allLevels = json.load(json_file)
 
 
-def getWikipage(wikipage, target, score, link_left):
+def getWikipage(wikipage, target, score, link_left, time_left):
     r = requests.get('https://en.wikipedia.org/wiki/' + wikipage)
     txt = r.text
     soup = bs4.BeautifulSoup(txt)
@@ -34,14 +35,17 @@ def getWikipage(wikipage, target, score, link_left):
     link0 = bs4.BeautifulSoup('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gloria Hallelujah">')
     link1 = bs4.BeautifulSoup('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Condensed">')
     link2 = bs4.BeautifulSoup('<link rel="stylesheet" href="static/stylesheet.css">')
+    link3 = bs4.BeautifulSoup('<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>')
     soup.head.append(link0)
     soup.head.append(link1)
     soup.head.append(link2)
+    soup.head.append(link3)
 
     searchBar = soup.find(id='simpleSearch')
     searchBar.decompose()
 
-    extraSoup = bs4.BeautifulSoup('<div id="mw-head" class="card card-normal font-normal" style="text-align: center;"><p class="font-normal">TARGET:</p> ' + target + '<br><p class="font-normal">LINK LEFT:</p> ' + str(link_left) + '</div>')
+    extraSoup = bs4.BeautifulSoup('<div id="mw-head" class="card card-normal font-normal" style="text-align: center;"><p class="font-normal">TARGET:</p> ' + target + '<br><p class="font-normal">LINK LEFT:</p> ' + str(link_left) + '<br>' + open("templates/timer.html", "r").read().replace("M:SS", time_left, 1) + '</div>')
+    
     soup.find(id='mw-head').replace_with(extraSoup)
     #targetElt.insert(0, "TARGET: " + target)
 
@@ -96,6 +100,8 @@ def level(level):
         score = session["info"]["score"]
         session.clear()
         return render_template("winGame.html", score=score)
+    levelToDo = allLevels[level]
+    levelToDo["levelStarted"] = False
     session["info"] = {
         "id": session["info"]["id"],
         "level": allLevels[level],
@@ -117,6 +123,24 @@ def wikipage(wikipage):
             "stepDone": session["info"]["stepDone"] + 1,
             "score": session["info"]["score"]
         }
+        if session["info"]["level"]["start"] == wikipage and not session["info"]["level"]["levelStarted"]:
+            #The player start a new round
+            now = datetime.now()
+            session["info"] = {
+            "id": session["info"]["id"],
+            "level": {
+                "start":session["info"]["level"]["start"],
+                "end":session["info"]["level"]["end"],
+                "minStep":session["info"]["level"]["minStep"],
+                "maxStep":session["info"]["level"]["maxStep"],
+                "startTime": now,
+                "levelStarted": True
+            },
+            "levelNb": session["info"]["levelNb"],
+            "stepDone": session["info"]["stepDone"],
+            "score": session["info"]["score"]
+        }
+
         if session["info"]["level"]["end"] == wikipage:
             scoreToWin = abs(session["info"]["stepDone"] - session["info"]["level"]["maxStep"])
             session["info"] = {
@@ -130,10 +154,11 @@ def wikipage(wikipage):
             return render_template("win.html", scoreEarn=scoreToWin, score=session["info"]["score"])
 
         else:
-            if session["info"]["stepDone"] > session["info"]["level"]["maxStep"]:
+            if session["info"]["stepDone"] > session["info"]["level"]["maxStep"] or session["info"]["level"]["startTime"] + timedelta(minutes = 1, seconds=58) <= datetime.now():
                 session.clear()
                 return render_template("gameover.html")
-            return getWikipage(wikipage, session["info"]["level"]["end"], session["info"]["score"], (session["info"]["level"]["maxStep"] - session["info"]["stepDone"]) + 1)
+            timeTimer = (session["info"]["level"]["startTime"] + timedelta(minutes = 2)) - datetime.now()
+            return getWikipage(wikipage, session["info"]["level"]["end"], session["info"]["score"], (session["info"]["level"]["maxStep"] - session["info"]["stepDone"]) + 1, str(timeTimer)[3:7])
     else:
         return "This is an error message: You need to start a level before"
 
