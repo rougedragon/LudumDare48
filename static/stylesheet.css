@@ -55,3 +55,11 @@ a {
     font-size: 200%;
     margin-top: 0;
 }
+.font-title {
+    font-family: Gloria Hallelujah;
+    display:inline;
+}
+.font-normal {
+    font-family: Roboto Condensed;
+    display:inline;
+}

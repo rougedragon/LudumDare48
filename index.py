@@ -31,10 +31,17 @@ def getWikipage(wikipage, target, score, link_left):
     styleTag.insert(0, style)
     soup.head.append(styleTag)
 
+    link0 = bs4.BeautifulSoup('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gloria Hallelujah">')
+    link1 = bs4.BeautifulSoup('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Condensed">')
+    link2 = bs4.BeautifulSoup('<link rel="stylesheet" href="static/stylesheet.css">')
+    soup.head.append(link0)
+    soup.head.append(link1)
+    soup.head.append(link2)
+
     searchBar = soup.find(id='simpleSearch')
     searchBar.decompose()
 
-    extraSoup = bs4.BeautifulSoup('<div id="mw-head" style="color:red;text-align:center;font-size:x-large;">TARGET: ' + target + '<br>SCORE: ' + str(score) + '<br>LINK LEFT: ' + str(link_left) + '</div>')
+    extraSoup = bs4.BeautifulSoup('<div id="mw-head" class="card card-normal font-normal" style="text-align: center;"><p class="font-normal">TARGET:</p> ' + target + '<br><p class="font-normal">LINK LEFT:</p> ' + str(link_left) + '</div>')
     soup.find(id='mw-head').replace_with(extraSoup)
     #targetElt.insert(0, "TARGET: " + target)
 
