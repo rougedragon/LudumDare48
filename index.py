@@ -1,11 +1,11 @@
-from flask import Flask, session, redirect, render_template
+from flask import Flask, session, redirect, render_template, send_file
 import bs4
 import requests
 import random
 import string
 import json
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static")
 app.secret_key = "YOUR SECRET KEY HERE"
 
 allLevels = []
@@ -59,7 +59,6 @@ def create_player_id():
 def index():
     return render_template("index.html")
 
-
 @app.route('/menu')
 def menu():
     if not "info" in session:
@@ -98,7 +97,7 @@ def level(level):
         "score": session["info"]["score"]
     }
     session["info"]["level"] = allLevels[level]
-    return render_template("levelStart.html", start=session["info"]["level"]["start"], end=session["info"]["level"]["end"], maxStep=str(session["info"]["level"]["maxStep"]), minStep=str(session["info"]["level"]["minStep"]), href='/wiki/' + session["info"]["level"]["start"])
+    return render_template("levelStart.html", start=session["info"]["level"]["start"], end=session["info"]["level"]["end"], maxStep=str(session["info"]["level"]["maxStep"]), minStep=str(session["info"]["level"]["minStep"]), href='/wiki/' + session["info"]["level"]["start"], level=level + 1)
 
 
 @app.route('/wiki/<wikipage>')
@@ -121,7 +120,7 @@ def wikipage(wikipage):
                 "score": session["info"]["score"] + scoreToWin
             }
             session["info"]["level"] = {}
-            return render_template("win.html")
+            return render_template("win.html", scoreEarn=scoreToWin, score=session["info"]["score"])
 
         else:
             if session["info"]["stepDone"] > session["info"]["level"]["maxStep"]:

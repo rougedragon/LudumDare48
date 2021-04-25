@@ -1,0 +1,57 @@
+body {
+    background: #e2e1e0;
+    text-align: center;
+}
+.card {
+    border-radius: 2px;
+    display: inline-block;
+    margin: 1rem;
+    position: relative;
+    width: 88%;
+}
+.card-title {
+    background-image: url("banner.png")
+}
+.card-normal {
+    font-family: Roboto Condensed;
+    font-size: x-large;
+}
+.text-center {
+    text-align: center;
+    margin: 0;
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.start-btn {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
+    outline: none;
+    color: #2ecc71;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+.start-btn:hover {
+    background: #2ecc71;
+    color: white;
+}
+a {
+    text-decoration: none;
+}
+.title {
+    font-family: Gloria Hallelujah;
+    font-size: 350%;
+    margin-bottom: 0;
+}
+.subtitle {
+    font-family: Gloria Hallelujah;
+    font-size: 200%;
+    margin-top: 0;
+}

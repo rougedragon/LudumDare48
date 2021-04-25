@@ -4,9 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki Game</title>
+    <title>Find the page!</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gloria Hallelujah">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Condensed">
+    <link rel="stylesheet" href="/static/stylesheet.css">
 </head>
 <body>
-    You have win the game with a score of {{score}}! Go back to the <a href="/">menu</a> to restart the game
+    <div class="card">
+        <div class="title">You win the game</div>
+    </div>
+    <div class="card card-normal">
+        <div>You have a final score of {{score}}</div>
+    </div>
+    <div class="card card-normal">
+        <a href="/"><button class="start-btn">Menu</button></a>
+    </div>
 </body>
 </html>

@@ -4,13 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki game</title>
+    <title>Find the page!</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gloria Hallelujah">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Condensed">
+    <link rel="stylesheet" href="static/stylesheet.css">
 </head>
 <body>
-    <h1>Welcome to Wiki Game</h1>
-    <h2>How to play?</h2>
-    <p>You start at a wikipedia page and your goal is to navigate to a target page using only links.</p>
-    <p>You think it's easy? Good luck!</p>
-    <a href="/menu">Start the game!</a>
+    <div class="card card-title">
+        <h1 class="title">Welcome to Find The Page!</h1>
+        <h2 class="subtitle">The Wiki Game!</h2>
+    </div>
+
+    <div class="card card-normal">
+        <h2 class="how-to-play-title">How to play?</h2>
+        <p class="how-to-play-text">You start at a wikipedia page and your goal is to navigate to a target page using only links.</p>
+        <p class="how-to-play-text">You think it's easy? Good luck!</p>
+    </div>
+
+    <div class="card">
+        <a href="/menu"><button class="start-btn">Start the game!</button></a>
+    </div>
 </body>
 </html>
