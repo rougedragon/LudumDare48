@@ -1,10 +1,24 @@
-from flask import Flask, session, redirect, render_template, send_file
+from flask import Flask, session, redirect, render_template, send_file, request
 import bs4
 import requests
 import random
 import string
 import json
 from datetime import datetime, timedelta
+import sqlite3
+import time
+
+conn = sqlite3.connect('highscore.db')
+cursor = conn.cursor()
+
+cursor.execute("""CREATE TABLE IF NOT EXISTS highscore (
+            name text,
+            score integer,
+            level integer
+            )""")
+
+conn.commit()
+conn.close()
 
 app = Flask(__name__, static_folder="static")
 app.secret_key = "YOUR SECRET KEY HERE"
@@ -70,6 +84,31 @@ def create_player_id():
 def index():
     return render_template("index.html")
 
+@app.route('/highscore', methods=["POST", "GET"])
+def highscore():
+    conn = sqlite3.connect("highscore.db")
+    cursor = conn.cursor()
+    if request.method == "POST":
+        name = request.form["name"]
+        score = request.form["score"]
+        level = request.form["level"]
+        cursor.execute("INSERT INTO highscore VALUES ('" + name + "'," + score + "," + level + ")")
+        conn.commit()
+        time.sleep(2)
+
+    cursor.execute("SELECT * FROM highscore ORDER BY score")
+    listOfAllScoreSql = cursor.fetchall()
+    listOfAllScoreSql.reverse()
+    if len(listOfAllScoreSql) > 100:
+        listOfAllScoreSql = listOfAllScoreSql[:100]
+    listOfAllScore = []
+    i = 1
+    for elt in listOfAllScoreSql:
+        a, b, c = elt
+        listOfAllScore.append([i,a,b,c])
+        i += 1
+    return render_template("highscore.html", listOfAllScore=listOfAllScore)
+
 @app.route('/menu')
 def menu():
     if not "info" in session:
@@ -82,7 +121,6 @@ def menu():
             }
         return redirect("/0")
     else:
-        print(session["info"])
         session["info"] = {
             "id": session["info"]["id"],
             "level": session["info"]["level"],
@@ -90,7 +128,6 @@ def menu():
             "levelNb": session["info"]["levelNb"] + 1,
             "score": session["info"]["score"]
         }
-        print(session["info"]["levelNb"])
         return redirect("/" + str(session["info"]["levelNb"]))
 
 @app.route('/<int:level>')
@@ -99,7 +136,7 @@ def level(level):
         #The player win
         score = session["info"]["score"]
         session.clear()
-        return render_template("winGame.html", score=score)
+        return render_template("winGame.html", score=str(score), level=str(len(allLevels)))
     levelToDo = allLevels[level]
     levelToDo["levelStarted"] = False
     session["info"] = {
@@ -155,8 +192,10 @@ def wikipage(wikipage):
 
         else:
             if session["info"]["stepDone"] > session["info"]["level"]["maxStep"] or session["info"]["level"]["startTime"] + timedelta(minutes = 1, seconds=58) <= datetime.now():
+                score = session["info"]["score"]
+                level = session["info"]["levelNb"]
                 session.clear()
-                return render_template("gameover.html")
+                return render_template("gameover.html", score=score, level=level)
             timeTimer = (session["info"]["level"]["startTime"] + timedelta(minutes = 2)) - datetime.now()
             return getWikipage(wikipage, session["info"]["level"]["end"], session["info"]["score"], (session["info"]["level"]["maxStep"] - session["info"]["stepDone"]) + 1, str(timeTimer)[3:7])
     else:
