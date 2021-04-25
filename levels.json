@@ -48,5 +48,80 @@
         "start": "River",
         "end": "Pacific_Ocean",
         "minStep": 2
+    },
+    {
+        "start": "Drawing",
+        "end": "Tree",
+        "minStep": 3
+    },
+    {
+        "start": "Tea",
+        "end": "Coffee_bean",
+        "minStep": 3
+    },
+    {
+        "start": "Audience",
+        "end": "Language",
+        "minStep": 3
+    },
+    {
+        "start": "Currency",
+        "end": "Europe",
+        "minStep": 3
+    },
+    {
+        "start": "Advertising",
+        "end": "Cable_television",
+        "minStep": 3
+    },
+    {
+        "start": "Advertising",
+        "end": "Cable_television",
+        "minStep": 3
+    },
+    {
+        "start": "Ladder",
+        "end": "Earth",
+        "minStep": 3
+    },
+    {
+        "start": "City",
+        "end": "Natural_resource",
+        "minStep": 3
+    },
+    {
+        "start": "Championship",
+        "end": "Exercise",
+        "minStep": 3
+    },
+    {
+        "start": "Freedom",
+        "end": "Mind",
+        "minStep": 3
+    },
+    {
+        "start": "Storage",
+        "end": "Protein",
+        "minStep": 4
+    },
+    {
+        "start": "Ear",
+        "end": "Sound_intensity",
+        "minStep": 4
+    },
+    {
+        "start": "Event",
+        "end": "Resource_allocation",
+        "minStep": 4
+    },
+    {
+        "start": "Web_browser",
+        "end": "Development",
+        "minStep": 4
+    },
+    {
+        "start": "Disease",
+        "end": "Computer_program",
+        "minStep": 4
     }
 ]
