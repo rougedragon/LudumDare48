@@ -21,7 +21,7 @@ conn.commit()
 conn.close()
 
 app = Flask(__name__, static_folder="static")
-app.secret_key = "SECRET KEY HERE"
+app.secret_key = "G8QHIg2qg4GHQZg"
 
 allLevels = []
 with open('levels.json') as json_file:
@@ -194,7 +194,7 @@ def wikipage(wikipage):
         }
 
         if session["info"]["level"]["end"] == wikipage:
-            scoreToWin = abs(session["info"]["stepDone"] - session["info"]["level"]["maxStep"])
+            scoreToWin = abs(session["info"]["stepDone"] - 1 - session["info"]["level"]["maxStep"] )
             session["info"] = {
                 "id": session["info"]["id"],
                 "level": session["info"]["level"],
@@ -219,4 +219,4 @@ def wikipage(wikipage):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=10001)
+    app.run(port=10001)
