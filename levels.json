@@ -20,8 +20,8 @@
         "minStep": 2
     },
     {
-        "start": "Mathematics",
-        "end": "Proposition",
+        "start": "Bread",
+        "end": "Fluid",
         "minStep": 2
     },
     {
@@ -41,7 +41,7 @@
     },
     {
         "start": "Psychology",
-        "end": "Thought",
+        "end": "Action_(philosophy)",
         "minStep": 2
     },
     {
@@ -56,7 +56,7 @@
     },
     {
         "start": "Tea",
-        "end": "Coffee_bean",
+        "end": "Greek_language",
         "minStep": 3
     },
     {
@@ -67,16 +67,6 @@
     {
         "start": "Currency",
         "end": "Europe",
-        "minStep": 3
-    },
-    {
-        "start": "Advertising",
-        "end": "Cable_television",
-        "minStep": 3
-    },
-    {
-        "start": "Advertising",
-        "end": "Cable_television",
         "minStep": 3
     },
     {

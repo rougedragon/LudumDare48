@@ -21,7 +21,7 @@ conn.commit()
 conn.close()
 
 app = Flask(__name__, static_folder="static")
-app.secret_key = "gz4ZgqzsGQ865"
+app.secret_key = "gGZ86Hzq4GZGqg5qzHH5hqz48hQ"
 
 allLevels = []
 with open('levels.json') as json_file:
@@ -58,7 +58,7 @@ def getWikipage(wikipage, target, score, link_left, time_left):
     searchBar = soup.find(id='simpleSearch')
     searchBar.decompose()
 
-    extraSoup = bs4.BeautifulSoup('<div id="mw-head" class="card card-normal font-normal" style="position:fixed;text-align: center;font-size: xxx-large;background-color:#383838;color: white;"><p class="font-normal" style="font-size:xx-large;color:#d1d1d1">Target page:</p> ' + target + '<br><p class="font-normal" style="font-size:xx-large;color:#d1d1d1">Clicks left:</p> ' + str(link_left) + ' <p class="font-normal" style="font-size:xx-large;color:#d1d1d1">| Time left:</p> ' + open("templates/timer.html", "r").read().replace("M:SS", time_left, 1) + '</div>')
+    extraSoup = bs4.BeautifulSoup('<div id="mw-head" class="card card-normal font-normal" style="position:fixed;text-align: center;font-size: xxx-large;background-color:#f57200;color: white;"><p class="font-normal" style="font-size:xx-large;color:#d1d1d1">Target page:</p> ' + target + '<br><p class="font-normal" style="font-size:xx-large;color:#d1d1d1">Clicks left:</p> ' + str(link_left) + ' <p class="font-normal" style="font-size:xx-large;color:#d1d1d1">| Time left:</p> ' + open("templates/timer.html", "r").read().replace("M:SS", time_left, 1) + '</div>')
     
     soup.find(id='mw-head').replace_with(extraSoup)
     #targetElt.insert(0, "TARGET: " + target)
