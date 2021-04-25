@@ -119,7 +119,6 @@ def highscore():
         a, b, c = elt
         listOfAllScore.append([i,a,b,c])
         i += 1
-    time.sleep(2)
     conn.close()
     return render_template("highscore.html", listOfAllScore=listOfAllScore)
 
