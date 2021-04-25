@@ -139,6 +139,7 @@ def level(level):
         return render_template("winGame.html", score=str(score), level=str(len(allLevels)))
     levelToDo = allLevels[level]
     levelToDo["levelStarted"] = False
+    levelToDo["maxStep"] = levelToDo["minStep"] + 2
     session["info"] = {
         "id": session["info"]["id"],
         "level": allLevels[level],
