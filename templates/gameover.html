@@ -14,8 +14,12 @@
         <div class="title">GAME OVER</div>
     </div>
     <div class="card card-normal">
+        <div>You have a final score of {{score}}</div>
+        <div>You are in position {{positionHighScore}} on {{nbHighScore}} scores</div>
+    </div>
+    <div class="card card-normal">
         <form action="/highscore" method="POST">
-            <input class="input" type="text" name="name" placeholder="Your name">
+            <input class="input" type="text" name="name" placeholder="Enter your name">
             <input class="hide" type="text" name="level" value="{{level}}">
             <input class="hide" type="text" name="score" value="{{score}}">
             <button type="submit" class="start-btn">Submit my score</button>

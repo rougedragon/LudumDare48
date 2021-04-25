@@ -21,7 +21,7 @@ conn.commit()
 conn.close()
 
 app = Flask(__name__, static_folder="static")
-app.secret_key = "YOUR SECRET KEY HERE"
+app.secret_key = "SECRET KEY HERE"
 
 allLevels = []
 with open('levels.json') as json_file:
@@ -58,7 +58,7 @@ def getWikipage(wikipage, target, score, link_left, time_left):
     searchBar = soup.find(id='simpleSearch')
     searchBar.decompose()
 
-    extraSoup = bs4.BeautifulSoup('<div id="mw-head" class="card card-normal font-normal" style="text-align: center;"><p class="font-normal">TARGET:</p> ' + target + '<br><p class="font-normal">LINK LEFT:</p> ' + str(link_left) + '<br>' + open("templates/timer.html", "r").read().replace("M:SS", time_left, 1) + '</div>')
+    extraSoup = bs4.BeautifulSoup('<div id="mw-head" class="card card-normal font-normal" style="text-align: center;font-size: xxx-large;background-color:#383838;color: white;"><p class="font-normal" style="font-size:xx-large;color:#d1d1d1">Target page:</p> ' + target + '<br><p class="font-normal" style="font-size:xx-large;color:#d1d1d1">Clicks left:</p> ' + str(link_left) + ' <p class="font-normal" style="font-size:xx-large;color:#d1d1d1">| Time left:</p> ' + open("templates/timer.html", "r").read().replace("M:SS", time_left, 1) + '</div>')
     
     soup.find(id='mw-head').replace_with(extraSoup)
     #targetElt.insert(0, "TARGET: " + target)
@@ -79,6 +79,19 @@ def create_player_id():
     final_string = ''.join(sam_list)
     return final_string
 
+def getPositionOfHighScore(score):
+    conn2 = sqlite3.connect("highscore.db")
+    cursor2 = conn2.cursor()
+    cursor2.execute("SELECT COUNT(*) FROM highscore WHERE score > " + str(score))
+    positionHighScore_ = cursor2.fetchone()
+    cursor2.execute("SELECT COUNT(*) FROM highscore")
+    nbHighScore_ = cursor2.fetchone()
+    positionHighScore = positionHighScore_[0]
+    nbHighScore = nbHighScore_[0]
+    positionHighScore += 1
+    nbHighScore += 1
+    conn2.close()
+    return positionHighScore, nbHighScore
 
 @app.route('/')
 def index():
@@ -137,7 +150,8 @@ def level(level):
         #The player win
         score = session["info"]["score"]
         session.clear()
-        return render_template("winGame.html", score=str(score), level=str(len(allLevels)))
+        positionHighScore, nbHighScore = getPositionOfHighScore(score)
+        return render_template("winGame.html", score=str(score), level=str(len(allLevels)), positionHighScore=positionHighScore, nbHighScore=nbHighScore)
     levelToDo = allLevels[level]
     levelToDo["levelStarted"] = False
     levelToDo["maxStep"] = levelToDo["minStep"] + 2
@@ -197,7 +211,8 @@ def wikipage(wikipage):
                 score = session["info"]["score"]
                 level = session["info"]["levelNb"]
                 session.clear()
-                return render_template("gameover.html", score=score, level=level)
+                positionHighScore, nbHighScore = getPositionOfHighScore(score)
+                return render_template("gameover.html", score=score, level=level, positionHighScore=positionHighScore, nbHighScore=nbHighScore)
             timeTimer = (session["info"]["level"]["startTime"] + timedelta(minutes = 2)) - datetime.now()
             return getWikipage(wikipage, session["info"]["level"]["end"].replace("_", " "), session["info"]["score"], (session["info"]["level"]["maxStep"] - session["info"]["stepDone"]) + 1, str(timeTimer)[3:7])
     else:

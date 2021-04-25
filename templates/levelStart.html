@@ -14,14 +14,14 @@
         <div class="title">Level {{level}}</div>
     </div>
     <div class="card card-normal">
-        <div>You start at {{start}}</div>
+        <div>Start page: <p class="color-blue">{{start}}</p>.</div>
     </div>
     <div class="card card-normal">
-        <div>Your target page is {{end}}</div>
+        <div>Your target page is <p class="color-green">{{end}}</p>.</div>
     </div>
     <div class="card card-normal">
-        <div>You have a maximum of {{maxStep}} links to click</div>
-        <div>You can do it in only {{minStep}} links</div>
+        <div>You must get to the target page in less than {{maxStep}} clicks.</div>
+        <div>But there is a solution in only {{minStep}} click{% if minStep | int > 1 %}s{%endif%}.</div>
     </div>
     <div class="card card-normal">
         <a href="{{href}}"><button class="start-btn">START</button></a>

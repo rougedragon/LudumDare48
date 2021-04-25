@@ -10,7 +10,7 @@ body {
     width: 88%;
 }
 .card-title {
-    background-image: url("banner.png")
+    background-image: url("/static/banner.png")
 }
 .card-normal {
     font-family: Roboto Condensed;
@@ -61,6 +61,14 @@ a {
 }
 .font-normal {
     font-family: Roboto Condensed;
+    display:inline;
+}
+.color-green {
+    color:#2ecc71;
+    display:inline;
+}
+.color-blue {
+    color:#3498db;
     display:inline;
 }
 
