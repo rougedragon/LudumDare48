@@ -14,7 +14,8 @@
         <div class="title">GAME OVER</div>
     </div>
     <div class="card card-normal">
-        <div>Your final score: <p class="font-normal" style="font-size: xx-large;">{{score}}</p></div>
+        <div>Your final score: <p style="font-size: 350%; margin: 1%;">{{score}}</p></div>
+        <div>You have reached level <p class="color-green">{{level}}</p></div>
         <div>Your position in the scoreboard is <p class="color-blue" style="font-weight: bold;">{{positionHighScore}}</p> out of <p class="color-green" style="font-weight: bold;">{{nbHighScore}}</p></div>
     </div>
     <div class="card card-normal">
@@ -22,11 +23,11 @@
             <input class="input" type="text" name="name" placeholder="Enter your name">
             <input class="hide" type="text" name="level" value="{{level}}">
             <input class="hide" type="text" name="score" value="{{score}}">
-            <button type="submit" class="start-btn">Submit my score</button>
+            <button type="submit" class="start-btn">Submit your score</button>
         </form>
     </div>
     <div class="card card-normal">
-        <a href="/"><button class="start-btn">menu</button></a>
+        <a href="/"><button class="start-btn">Menu</button></a>
     </div>
 </body>
 </html>
