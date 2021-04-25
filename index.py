@@ -194,7 +194,7 @@ def wikipage(wikipage):
         }
 
         if session["info"]["level"]["end"] == wikipage:
-            scoreToWin = abs(session["info"]["stepDone"] - 1 - session["info"]["level"]["maxStep"] )
+            scoreToWin = session["info"]["level"]["maxStep"] - (session["info"]["stepDone"] - 1) + 1
             session["info"] = {
                 "id": session["info"]["id"],
                 "level": session["info"]["level"],
