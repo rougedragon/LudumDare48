@@ -79,17 +79,17 @@
     <div class="card">
         <ul class="responsive-table">
             <li class="table-header">
-                <div class="col col-1 font-normal">place</div>
-                <div class="col col-2 font-normal">name</div>
-                <div class="col col-3 font-normal">score</div>
-                <div class="col col-4 font-normal">level</div>
+                <div class="col col-1 font-normal">Rank</div>
+                <div class="col col-2 font-normal">Name</div>
+                <div class="col col-3 font-normal">Score</div>
+                <div class="col col-4 font-normal">Level</div>
             </li>
         {% for score in listOfAllScore %}
             <li class="table-row">
-                <div class="col col-1 font-normal">{{score[0]}}</div>
-                <div class="col col-2 font-normal">{{score[1]}}</div>
-                <div class="col col-3 font-normal">{{score[2]}}</div>
-                <div class="col col-4 font-normal">{{score[3]}}</div>
+                <div data-label="Rank" class="col col-1 font-normal">{{score[0]}}</div>
+                <div data-label="Name" class="col col-2 font-normal">{{score[1]}}</div>
+                <div data-label="Score" class="col col-3 font-normal">{{score[2]}}</div>
+                <div data-label="Level" class="col col-4 font-normal">{{score[3]}}</div>
             </li>
         {% endfor %}
         </ul>

@@ -21,7 +21,7 @@ conn.commit()
 conn.close()
 
 app = Flask(__name__, static_folder="static")
-app.secret_key = "YOUR KEY HERE"
+app.secret_key = "gz4ZgqzsGQ865"
 
 allLevels = []
 with open('levels.json') as json_file:
